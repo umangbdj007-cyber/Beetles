@@ -21,9 +21,13 @@ app.use(express.json());
 const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
 const studentCoreRoutes = require('./routes/studentCore');
+const academicRoutes = require('./routes/academic');
+const occupancyRoutes = require('./routes/occupancy');
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 app.use('/api/core', studentCoreRoutes);
+app.use('/api/academic', academicRoutes);
+app.use('/api/occupancy', occupancyRoutes);
 
 // Socket.io for Real-Time Features
 io.on('connection', (socket) => {

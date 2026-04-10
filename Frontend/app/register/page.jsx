@@ -26,7 +26,7 @@ export default function Register() {
     <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
       <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl shadow-slate-200 border border-slate-100">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-extrabold text-primary-600 tracking-tight mb-2">Join Campusconnect</h1>
+          <h1 className="text-3xl font-extrabold text-primary-600 tracking-tight mb-2">Join UniGrid</h1>
           <p className="text-slate-500">Create an account to get started.</p>
         </div>
         

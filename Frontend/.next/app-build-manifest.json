@@ -11,16 +11,6 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/login/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/login/page.js"
-    ],
-    "/register/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/register/page.js"
-    ],
     "/academic/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -36,6 +26,11 @@
       "static/chunks/main-app.js",
       "static/chunks/app/marketplace/page.js"
     ],
+    "/student-core/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/student-core/page.js"
+    ],
     "/complaints/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -46,15 +41,10 @@
       "static/chunks/main-app.js",
       "static/chunks/app/chat/page.js"
     ],
-    "/student-core/page": [
+    "/login/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/student-core/page.js"
-    ],
-    "/academic/classes/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/academic/classes/page.js"
+      "static/chunks/app/login/page.js"
     ],
     "/admin/users/page": [
       "static/chunks/webpack.js",

@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from 'react';
-import Navbar from '@/components/Navbar';
 import api from '@/lib/api';
 import { useSocket } from '@/components/SocketProvider';
 import Link from 'next/link';
@@ -16,75 +15,28 @@ export default function StudentCorePage() {
   }, []);
 
   return (
-    <div className="bg-background text-on-surface font-body selection:bg-primary selection:text-on-primary min-h-screen">
-      <Navbar user={user} />
-
-      <div className="flex h-full">
-        {/* SideNavBar (Desktop) */}
-        <aside className="h-full w-64 fixed left-0 top-0 hidden lg:flex flex-col bg-[#131313] py-6 px-4 z-40 pt-24 border-r border-outline-variant/10">
-            <div className="mb-10 px-4">
-                <h2 className="text-xl font-black text-[#c9beff] font-headline">CampusConnect</h2>
-                <p className="text-xs text-gray-500 font-medium uppercase tracking-widest">The Neon Academic</p>
-            </div>
-            <nav className="flex-1 flex flex-col gap-2">
-                <Link href="/academic" className="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-[#2a2a2a] hover:text-[#ffaedd] rounded-xl transition-all duration-200 ease-in-out cursor-pointer">
-                    <span className="material-symbols-outlined">school</span>
-                    <span className="font-medium">Academic</span>
-                </Link>
-                <Link href="/events" className="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-[#2a2a2a] hover:text-[#ffaedd] rounded-xl transition-all duration-200 ease-in-out cursor-pointer">
-                    <span className="material-symbols-outlined">event</span>
-                    <span className="font-medium">Events</span>
-                </Link>
-                <Link href="/marketplace" className="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-[#2a2a2a] hover:text-[#ffaedd] rounded-xl transition-all duration-200 ease-in-out cursor-pointer">
-                    <span className="material-symbols-outlined">storefront</span>
-                    <span className="font-medium">Marketplace</span>
-                </Link>
-                <div className="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-[#6b4af6]/20 to-transparent text-[#c9beff] border-l-4 border-[#c9beff] rounded-r-xl transition-all duration-200 ease-in-out cursor-pointer">
-                    <span className="material-symbols-outlined" style={{fontVariationSettings: "'FILL' 1"}}>person</span>
-                    <span className="font-medium">Student Core</span>
-                </div>
-                <Link href="/complaints" className="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-[#2a2a2a] hover:text-[#ffaedd] rounded-xl transition-all duration-200 ease-in-out cursor-pointer">
-                    <span className="material-symbols-outlined">report_problem</span>
-                    <span className="font-medium">Complaints</span>
-                </Link>
-                <Link href="/chat" className="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-[#2a2a2a] hover:text-[#ffaedd] rounded-xl transition-all duration-200 ease-in-out cursor-pointer">
-                    <span className="material-symbols-outlined">forum</span>
-                    <span className="font-medium">Chat</span>
-                </Link>
-            </nav>
-            <div className="mt-auto border-t border-outline-variant/15 pt-6 flex flex-col gap-2">
-                <div className="flex items-center gap-3 px-4 py-3 text-gray-500 hover:bg-[#2a2a2a] hover:text-[#ffaedd] rounded-xl transition-all cursor-pointer">
-                    <span className="material-symbols-outlined">logout</span>
-                    <span className="font-medium" onClick={() => { localStorage.clear(); window.location.href='/login'; }}>Logout</span>
+    <div className="w-full pt-6 md:pt-10 pb-24 px-4 md:px-8">
+        <header className="mb-10">
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                <div>
+                    <h1 className="text-5xl font-black font-headline tracking-tighter text-on-surface mb-2">Student Core</h1>
+                    <p className="text-secondary font-medium tracking-wide">Syncing your academic pulse in real-time.</p>
                 </div>
             </div>
-        </aside>
+        </header>
 
-        {/* Main Canvas */}
-        <main className="lg:ml-64 w-full pt-6 md:pt-10 pb-24 px-4 md:px-8">
-            <header className="mb-10">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-                    <div>
-                        <h1 className="text-5xl font-black font-headline tracking-tighter text-on-surface mb-2">Student Core</h1>
-                        <p className="text-secondary font-medium tracking-wide">Syncing your academic pulse in real-time.</p>
-                    </div>
-                </div>
-            </header>
-
-            <div className="asymmetric-grid">
-                <WorkloadPredictor />
-                <CanteenCrowd user={user} />
-                <ContributionTracker userId={user?.id} />
-                <SkillSwapBounties />
-                <AttendanceSafetyNet />
-            </div>
-            
-            {/* FAB */}
-            <button className="fixed bottom-24 md:bottom-8 right-8 w-16 h-16 bg-gradient-to-br from-primary to-primary-container rounded-full shadow-[0_8px_32px_rgba(107,74,246,0.4)] flex items-center justify-center text-on-primary active:scale-90 transition-transform z-40">
-                <span className="material-symbols-outlined text-3xl">add_task</span>
-            </button>
-        </main>
-      </div>
+        <div className="asymmetric-grid">
+            <WorkloadPredictor />
+            <CanteenCrowd user={user} />
+            <ContributionTracker userId={user?.id} />
+            <SkillSwapBounties />
+            <AttendanceSafetyNet />
+        </div>
+        
+        {/* FAB */}
+        <button className="fixed bottom-24 md:bottom-8 right-8 w-16 h-16 bg-gradient-to-br from-primary to-primary-container rounded-full shadow-[0_8px_32px_rgba(107,74,246,0.4)] flex items-center justify-center text-on-primary active:scale-90 transition-transform z-40">
+            <span className="material-symbols-outlined text-3xl">add_task</span>
+        </button>
     </div>
   );
 }

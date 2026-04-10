@@ -99,6 +99,14 @@ router.get('/events', auth, async (req, res) => {
   } catch (err) { res.status(500).send('Server error'); }
 });
 
+router.get('/events/nearest', auth, async (req, res) => {
+  try {
+    const now = new Date();
+    const event = await Event.findOne({ startTime: { $gt: now }, approvalStatus: 'Approved' }).sort({ startTime: 1 });
+    res.json(event || {});
+  } catch (err) { res.status(500).send('Server error'); }
+});
+
 router.post('/events', auth, role(['Admin', 'Teacher', 'Student']), async (req, res) => {
   try {
     const { name, description, startTime, endTime, location } = req.body;
@@ -106,7 +114,7 @@ router.post('/events', auth, role(['Admin', 'Teacher', 'Student']), async (req, 
     // Check global location/time clash for approved events
     const clash = await Event.findOne({
       location,
-      status: 'Approved',
+      approvalStatus: 'Approved',
       $or: [
         { startTime: { $lt: endTime, $gte: startTime } },
         { endTime: { $gt: startTime, $lte: endTime } }
@@ -119,16 +127,25 @@ router.post('/events', auth, role(['Admin', 'Teacher', 'Student']), async (req, 
 
     const event = new Event({ 
       name, description, startTime, endTime, location, 
-      status: req.user.role === 'Admin' ? 'Approved' : 'Pending' 
+      approvalStatus: req.user.role === 'Admin' ? 'Approved' : 'Pending',
+      createdBy: req.user.id
     });
     await event.save();
+    
+    const io = req.app.get('socketio');
+    if (io) io.emit('event:update', event);
+
     res.json(event);
   } catch (err) { res.status(500).send('Server error'); }
 });
 
 router.put('/events/:id/status', auth, role(['Admin']), async (req, res) => {
   try {
-    const event = await Event.findByIdAndUpdate(req.params.id, { status: req.body.status }, { new: true });
+    const event = await Event.findByIdAndUpdate(req.params.id, { approvalStatus: req.body.status }, { new: true });
+    
+    const io = req.app.get('socketio');
+    if (io) io.emit('event:update', event);
+    
     res.json(event);
   } catch (err) { res.status(500).send('Server error'); }
 });

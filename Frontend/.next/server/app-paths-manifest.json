@@ -1,11 +1,9 @@
 {
   "/page": "app/page.js",
-  "/student-core/page": "app/student-core/page.js",
-  "/academic/page": "app/academic/page.js",
-  "/login/page": "app/login/page.js",
-  "/marketplace/page": "app/marketplace/page.js",
-  "/complaints/page": "app/complaints/page.js",
   "/events/page": "app/events/page.js",
+  "/academic/page": "app/academic/page.js",
   "/chat/page": "app/chat/page.js",
-  "/admin/users/page": "app/admin/users/page.js"
+  "/complaints/page": "app/complaints/page.js",
+  "/marketplace/page": "app/marketplace/page.js",
+  "/student-core/page": "app/student-core/page.js"
 }

@@ -42,7 +42,7 @@ export default function Login() {
         <div className="hidden md:flex w-5/12 p-12 flex-col justify-between bg-surface-container-low border-r border-outline-variant/15">
           <div>
             <h1 className="text-3xl font-headline font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-container">
-                CampusConnect
+                UniGrid
             </h1>
             <p className="mt-4 text-on-surface-variant font-medium leading-relaxed">
                 The Neon Academic. Empowering student collaboration through a refined digital ecosystem.

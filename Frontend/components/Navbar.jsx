@@ -18,7 +18,7 @@ export default function Navbar({ user }) {
       <div className="flex justify-between items-center px-8 h-20 w-full max-w-[1920px] mx-auto">
         <div className="flex items-center gap-8">
           <Link href="/" className="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-container font-headline border-r border-outline-variant/20 pr-8">
-             CampusConnect
+             UniGrid
           </Link>
           
           <div className="hidden md:flex gap-6 items-center">

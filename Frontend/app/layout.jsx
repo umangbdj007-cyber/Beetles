@@ -1,8 +1,9 @@
 import './globals.css'
 import { SocketProvider } from '@/components/SocketProvider'
+import PageWrapper from '@/components/PageWrapper'
 
 export const metadata = {
-  title: 'Campusconnect',
+  title: 'UniGrid',
   description: 'Role-based campus management platform',
 }
 
@@ -15,7 +16,9 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <SocketProvider>
-          {children}
+          <PageWrapper>
+            {children}
+          </PageWrapper>
         </SocketProvider>
       </body>
     </html>
