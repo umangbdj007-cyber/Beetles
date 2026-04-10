@@ -1,9 +1,10 @@
 {
   "/page": "app/page.js",
   "/events/page": "app/events/page.js",
-  "/academic/page": "app/academic/page.js",
-  "/chat/page": "app/chat/page.js",
-  "/complaints/page": "app/complaints/page.js",
   "/marketplace/page": "app/marketplace/page.js",
+  "/chat/page": "app/chat/page.js",
+  "/academic/page": "app/academic/page.js",
+  "/login/page": "app/login/page.js",
+  "/complaints/page": "app/complaints/page.js",
   "/student-core/page": "app/student-core/page.js"
 }
