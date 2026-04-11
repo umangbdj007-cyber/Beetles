@@ -146,6 +146,18 @@ export default function StudentDashboard() {
         {/* RIGHT COLUMN: Feed, Elements */}
         <div className="md:col-span-4 flex flex-col gap-8">
            
+           {/* Inventory Link */}
+           <Link href="/inventory" className="group relative overflow-hidden rounded-[2rem] bg-surface-container-low p-6 transition-all duration-300 hover:bg-surface-container-high hover:-translate-y-1 active:scale-95 border border-outline-variant/10 border-l-4 border-l-primary flex items-center justify-between">
+              <div className="absolute inset-0 z-0 opacity-10 group-hover:opacity-20 transition-opacity pointer-events-none">
+                <div className="w-full h-full bg-gradient-to-r from-primary/20 to-transparent"></div>
+              </div>
+              <div className="relative z-10">
+                <h3 className="text-xl font-black font-headline text-on-surface">Ecosystem Inventory</h3>
+                <p className="text-[10px] text-zinc-500 mt-1 uppercase font-black tracking-widest">P2P Hardware & Mentors</p>
+              </div>
+              <span className="material-symbols-outlined text-primary text-3xl relative z-10">inventory_2</span>
+           </Link>
+
            {/* Nearest Event */}
            <Link href="/events" className="group relative overflow-hidden rounded-[2rem] bg-surface-container-low p-6 transition-all duration-300 hover:bg-surface-container-high hover:-translate-y-1 active:scale-95 border border-outline-variant/10 hover:border-secondary/30 block">
               <div className="absolute inset-0 z-0 opacity-20 group-hover:opacity-40 transition-opacity">

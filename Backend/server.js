@@ -27,6 +27,7 @@ const clubsRoutes = require('./routes/clubs');
 const recruitmentRoutes = require('./routes/recruitment');
 const assignmentsRoutes = require('./routes/assignments');
 const adminRoutes = require('./routes/admin');
+const inventoryRoutes = require('./routes/inventory');
 
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
@@ -37,6 +38,7 @@ app.use('/api/clubs', clubsRoutes);
 app.use('/api/recruitment', recruitmentRoutes);
 app.use('/api/assignments', assignmentsRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/inventory', inventoryRoutes);
 
 // Socket.io for Real-Time Features
 io.on('connection', (socket) => {
