@@ -24,7 +24,9 @@ export default function Login() {
       localStorage.setItem('role', res.data.role);
       localStorage.setItem('name', res.data.name);
       localStorage.setItem('userId', res.data.id || '');
-      router.push('/');
+      
+      const roleTarget = res.data.role.toLowerCase();
+      router.push(`/dashboard/${roleTarget}`);
     } catch (err) {
       setError(err.response?.data?.msg || 'Login failed');
     }

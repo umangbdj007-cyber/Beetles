@@ -44,41 +44,44 @@ export default function StudentCorePage() {
 // --- SUBCOMPONENTS ---
 
 function WorkloadPredictor() {
-  const [heatmap, setHeatmap] = useState({});
+  const [heatmap, setHeatmap] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api.get('/core/workload/predict').then(res => {
+    api.get('/assignments/workload/heatmap').then(res => {
       setHeatmap(res.data);
       setLoading(false);
     }).catch(err => console.error(err));
   }, []);
 
-  const days = Object.keys(heatmap).sort();
-  
-  const getColor = (score) => {
-    if (score === 0) return 'bg-tertiary-container/10';
-    if (score <= 4) return 'bg-tertiary-container/30';
-    if (score <= 8) return 'bg-yellow-500/40 border-yellow-500/20';
-    return 'pulse-red shadow-[0_0_15px_rgba(255,180,171,0.4)] border-error/50';
+  const getColor = (colorCode) => {
+    if (colorCode === 'Green') return 'bg-tertiary-container/30 border-transparent';
+    if (colorCode === 'Yellow') return 'bg-yellow-500/40 border-yellow-500/20';
+    if (colorCode === 'Red') return 'pulse-red shadow-[0_0_15px_rgba(255,180,171,0.4)] border-error/50';
+    return 'bg-tertiary-container/10';
   };
 
-  const highLoadDays = days.filter(d => heatmap[d] > 8).length;
+  const highLoadDays = heatmap.filter(d => d.colorCode === 'Red').length;
 
   return (
     <section className="bg-surface-container-low rounded-[2rem] p-6 md:p-8 flex flex-col justify-between border border-outline-variant/10 relative overflow-hidden group hover:border-primary/30 transition-colors">
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 blur-[50px] rounded-full pointer-events-none group-hover:bg-primary/10 transition-colors"></div>
         <div>
-            <div className="flex justify-between items-start mb-8">
+            <div className="flex justify-between items-start mb-6">
                 <h3 className="font-headline font-bold text-2xl tracking-tight">Workload Predictor</h3>
-                <span className="px-3 py-1 bg-secondary-container text-secondary-fixed text-[10px] font-black uppercase tracking-widest rounded-full">30-Day Heatmap</span>
+                <span className="px-3 py-1 bg-secondary-container text-secondary-fixed text-[10px] font-black uppercase tracking-widest rounded-full">Automated Aggregation</span>
             </div>
             
             {loading ? <div className="text-center py-10 opacity-50 text-sm">Mapping neural paths...</div> : (
               <div className="grid grid-cols-7 gap-2 md:gap-3 mb-8">
-                  {days.map(day => (
-                      <div key={day} className={`aspect-square rounded-lg flex items-center justify-center text-[10px] font-bold opacity-80 border border-transparent ${getColor(heatmap[day])}`} title={`Score: ${heatmap[day]}`}>
-                          {new Date(day).getDate()}
+                  {heatmap.length === 0 && <div className="col-span-7 py-4 text-xs text-zinc-500">No upcoming workloads targeted.</div>}
+                  {heatmap.map(day => (
+                      <div key={day.date} className={`aspect-square rounded-lg flex items-center justify-center text-[10px] font-bold opacity-90 border ${getColor(day.colorCode)} cursor-help relative group`} title={day.items.join(', ')}>
+                          <span className="absolute -top-1 -right-1 flex h-2 w-2">
+                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                             <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+                          </span>
+                          {new Date(day.date).getDate()}
                       </div>
                   ))}
               </div>
@@ -128,8 +131,8 @@ function CanteenCrowd({ user }) {
 
   const reportStatus = async (s) => {
     try {
-      await api.post('/core/canteen/status', { status: s });
-    } catch (e) { alert('Failed to report'); }
+      await api.post('/occupancy/update', { locationId: 'Canteen', status: s });
+    } catch (e) { alert(e.response?.data?.msg || 'Failed to report'); }
   };
 
   const getMeterColor = () => {

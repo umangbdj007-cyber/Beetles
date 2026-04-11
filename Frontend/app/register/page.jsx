@@ -16,7 +16,8 @@ export default function Register() {
       const res = await authApi.post('/register', formData);
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('role', res.data.role);
-      router.push('/login');
+      const roleTarget = res.data.role.toLowerCase();
+      router.push(`/dashboard/${roleTarget}`);
     } catch (err) {
       setError(err.response?.data?.msg || 'Registration failed');
     }

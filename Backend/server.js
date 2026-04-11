@@ -18,16 +18,25 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
-const authRoutes = require('./routes/auth');
 const apiRoutes = require('./routes/api');
+const authRoutes = require('./routes/auth');
 const studentCoreRoutes = require('./routes/studentCore');
 const academicRoutes = require('./routes/academic');
 const occupancyRoutes = require('./routes/occupancy');
+const clubsRoutes = require('./routes/clubs');
+const recruitmentRoutes = require('./routes/recruitment');
+const assignmentsRoutes = require('./routes/assignments');
+const adminRoutes = require('./routes/admin');
+
 app.use('/auth', authRoutes);
 app.use('/api', apiRoutes);
 app.use('/api/core', studentCoreRoutes);
 app.use('/api/academic', academicRoutes);
 app.use('/api/occupancy', occupancyRoutes);
+app.use('/api/clubs', clubsRoutes);
+app.use('/api/recruitment', recruitmentRoutes);
+app.use('/api/assignments', assignmentsRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Socket.io for Real-Time Features
 io.on('connection', (socket) => {

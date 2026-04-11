@@ -172,40 +172,7 @@ router.post('/events/:id/register', auth, role(['Student']), async (req, res) =>
   } catch (err) { res.status(500).send('Server error'); }
 });
 
-// --- ACADEMICS (Assignments & Class Logs) ---
-router.get('/assignments', auth, async (req, res) => {
-  try {
-    const assignments = await Assignment.find().populate('teacher', 'name');
-    res.json(assignments);
-  } catch (err) { res.status(500).send('Server error'); }
-});
-
-router.post('/assignments', auth, role(['Teacher']), async (req, res) => {
-  try {
-    const assign = new Assignment({
-      title: req.body.title,
-      description: req.body.description,
-      dueDate: req.body.dueDate,
-      teacher: req.user.id
-    });
-    await assign.save();
-    res.json(assign);
-  } catch (err) { res.status(500).send('Server error'); }
-});
-
-router.post('/assignments/:id/submit', auth, role(['Student']), async (req, res) => {
-  try {
-    const assign = await Assignment.findById(req.params.id);
-    const existing = assign.submissions.find(s => s.student.toString() === req.user.id);
-    if (existing) {
-      existing.content = req.body.content;
-    } else {
-      assign.submissions.push({ student: req.user.id, content: req.body.content });
-    }
-    await assign.save();
-    res.json(assign);
-  } catch (err) { res.status(500).send('Server error'); }
-});
+// --- ACADEMICS (Class Logs) ---
 
 router.get('/classes', auth, async (req, res) => {
   try {

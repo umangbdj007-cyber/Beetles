@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   role: { type: String, enum: ['Student', 'Teacher', 'Admin'], default: 'Student' },
+  societyVerified: { type: Boolean, default: false },
   reputationScore: { type: Number, default: 0 },
   githubUsername: { type: String, default: '' },
   leetcodeUsername: { type: String, default: '' }
