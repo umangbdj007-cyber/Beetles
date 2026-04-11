@@ -1,4 +1,4 @@
-# Campusconnect
+# UniGrid
 
 A fully functional, role-based campus management platform designed to integrate communication, academic management, and service workflows into one system. 
 
